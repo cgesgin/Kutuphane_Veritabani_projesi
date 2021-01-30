@@ -1,0 +1,1 @@
+--tablolarda karmaşık sorgulama işlemleri
