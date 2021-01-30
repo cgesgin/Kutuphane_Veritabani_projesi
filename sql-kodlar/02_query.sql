@@ -1,0 +1,1 @@
+--Tablolara veri ekleme işlemleri
