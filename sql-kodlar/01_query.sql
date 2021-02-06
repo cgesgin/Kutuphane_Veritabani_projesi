@@ -1,7 +1,9 @@
 -- Veri tabanı oluşturuldu. Tablolar ve yabancıl anahtar tanımlamaları yapıldı.
 
+--veri tabanı oluşturulmasu
 create database db_library;
 
+-- tablo oluşturulma işlermleri
 create table tbl_uyeler(
 	uye_no int identity(1,1) primary key not null,
 	uye_adi nvarchar(50) not null ,
@@ -49,12 +51,12 @@ create table tbl_kitap_yazar(
 		primary key("isbn","yazar_no")
 );
 
+
 create table tbl_kitap_kategori(
-	kitap_kategori_id int identity(1,1),
 	isbn int not null ,
 	kategori_no int not null, 
 	constraint "ktp_ktg_pk"
-		primary key("kitap_kategori_id","isbn","kategori_no")
+		primary key("isbn","kategori_no")
 );
 
 create table tbl_adresler(
@@ -76,6 +78,73 @@ create table tbl_kitaplar(
 );
 
 create table tbl_kategoriler(
-	kitap_no int identity(1,1) primary key,
+	kategori_no int identity(1,1) primary key,
 	kategori_adi varchar(20)
 );
+
+
+-- yabancıl anahtar tanımlamarı  ve cascade işlemleri
+
+alter table tbl_uyeler add constraint adresler_uyerler_fk
+		foreign key (adres_no) references tbl_adresler (adres_no)
+		on delete set null
+		on update cascade;
+
+
+alter table tbl_emanet add constraint uyeler_emanet_fk
+		foreign key (uye_no) references tbl_uyeler (uye_no)
+		on delete cascade
+		on update cascade;
+
+
+alter table tbl_emanet add constraint kutuphane_emanet_fk
+		foreign key (kutuphane_no) references tbl_kutuphane (kutuphane_no)
+		on delete cascade
+		on update cascade;
+
+
+alter table tbl_kitap_kategori add constraint kategoriler_kitap_kategori_fk
+		foreign key (kategori_no) references tbl_kategoriler (kategori_no)
+		on delete cascade
+		on update cascade;
+
+
+
+alter table tbl_kitap_yazar add constraint yazarlar_kitap_yazar_fk
+		foreign key (yazar_no) references tbl_yazarlar (yazar_no)
+		on delete cascade
+
+
+alter table tbl_kitap_kutuphane add constraint kitaplar_kitap_kutuphane_fk
+		foreign key (isbn) references tbl_kitaplar (isbn)
+		on delete cascade
+
+
+alter table tbl_kutuphane add constraint kutuphane_adresler_fk
+		foreign key (adres_no) references tbl_adresler (adres_no)
+
+
+alter table tbl_emanet add constraint emanet_kitaplar_fk
+		foreign key (isbn) references tbl_kitaplar (isbn)
+		on delete cascade
+		on update cascade
+		
+
+alter table tbl_kitap_kategori add constraint kitap_kategori_kitaplar_fk
+		foreign key (isbn) references tbl_kitaplar (isbn)
+		on delete cascade
+		on update cascade
+
+
+alter table tbl_kitap_yazar add constraint kitap_yazar_kitaplar_fk
+		foreign key (isbn) references tbl_kitaplar (isbn)
+		on delete cascade
+		on update cascade
+
+alter table tbl_kitap_kutuphane add constraint kitap_kutuphane_kutuphane_fk
+		foreign key (kutuphane_no) references tbl_kutuphane(kutuphane_no)
+		on delete cascade
+
+
+
+
