@@ -112,38 +112,38 @@ alter table tbl_kitap_kategori add constraint kategoriler_kitap_kategori_fk
 
 alter table tbl_kitap_yazar add constraint yazarlar_kitap_yazar_fk
 		foreign key (yazar_no) references tbl_yazarlar (yazar_no)
-		on delete cascade
+		on delete cascade;
 
 
 alter table tbl_kitap_kutuphane add constraint kitaplar_kitap_kutuphane_fk
 		foreign key (isbn) references tbl_kitaplar (isbn)
-		on delete cascade
+		on delete cascade;
 
 
 alter table tbl_kutuphane add constraint kutuphane_adresler_fk
-		foreign key (adres_no) references tbl_adresler (adres_no)
+		foreign key (adres_no) references tbl_adresler (adres_no);
 
 
 alter table tbl_emanet add constraint emanet_kitaplar_fk
 		foreign key (isbn) references tbl_kitaplar (isbn)
 		on delete cascade
-		on update cascade
+		on update cascade;
 		
 
 alter table tbl_kitap_kategori add constraint kitap_kategori_kitaplar_fk
 		foreign key (isbn) references tbl_kitaplar (isbn)
 		on delete cascade
-		on update cascade
+		on update cascade;
 
 
 alter table tbl_kitap_yazar add constraint kitap_yazar_kitaplar_fk
 		foreign key (isbn) references tbl_kitaplar (isbn)
 		on delete cascade
-		on update cascade
+		on update cascade;
 
 alter table tbl_kitap_kutuphane add constraint kitap_kutuphane_kutuphane_fk
 		foreign key (kutuphane_no) references tbl_kutuphane(kutuphane_no)
-		on delete cascade
+		on delete cascade;
 
 
 
