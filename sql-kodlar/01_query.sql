@@ -34,6 +34,21 @@ create table tbl_kutuphane(
 	adres_no int
 );
 
+create table tbl_kitap_kutuphane(
+	kutuphane_no int not null,
+	isbn int not null,
+	adet int,
+	constraint "tbl_kitap_kutuphane_pk"
+	primary key("kutuphane_no","isbn")
+);
+
+create table tbl_kitap_yazar(
+	isbn int not null,
+	yazar_no int not null,
+	constraint "tbl_kitap_yazar_pk"
+		primary key("isbn","yazar_no")
+);
+
 create table tbl_kitap_kategori(
 	kitap_kategori_id int identity(1,1),
 	isbn int not null ,
@@ -53,3 +68,14 @@ create table tbl_adresler(
 );
 
 
+create table tbl_kitaplar(
+	isbn int primary key,
+	kitap_adi varchar(20),
+	yayin_tarihi datetime,
+	sayfa_sayisi int	
+);
+
+create table tbl_kategoriler(
+	kitap_no int identity(1,1) primary key,
+	kategori_adi varchar(20)
+);
