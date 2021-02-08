@@ -1,4 +1,6 @@
 
+--sql sorgu çalışmaları 
+
 create database db_otogaleri;
 
 create table tbl_arac(
