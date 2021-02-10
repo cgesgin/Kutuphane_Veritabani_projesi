@@ -3,6 +3,8 @@
 
 create database db_otogaleri;
 
+--Tablo tanımlamaları 
+
 create table tbl_arac(
 	arac_no int identity(1,1) primary key,
 	model varchar(20), 
@@ -38,6 +40,8 @@ create table tbl_alım(
 	fiyat int
 );
 
+--Tablolarda constraint işlemleri
+
 alter table tbl_satıs add constraint musteri_satis_fk 
 	foreign key (musteri_no) references tbl_musteri(musteri_no);
 
@@ -68,6 +72,8 @@ alter table tbl_satıs add constraint df_satis_tarihi default '01.01.1900' for s
 
 alter table tbl_alım add constraint df_alim_tarihi default '01.01.1900' for alim_tarih;
 
+--Tablolara veri girişleri		       
+		       
 insert into tbl_musteri values('turgut','özseven','meram/konya',12345);
 insert into tbl_musteri values('mustafa','çağlayan','meram/konya',99345);
 insert into tbl_musteri values('ayşe','uçar','taşova/amasya',88345);
@@ -104,7 +110,8 @@ insert into tbl_alım values(9,29,'02.07.2010',26000);
 ---drop table tbl_musteri;
 ---drop table tbl_arac;
 
-
+--Tek tablo üzerinden sorgulamalar
+		       
 select model,marka,fiyat from tbl_arac where model<=2004;
 select model,marka,fiyat from tbl_arac where model>=2000 and model<=2900;
 select * from tbl_satıs where satis_tarih>'01.05.2010' and fiyat>10000;
