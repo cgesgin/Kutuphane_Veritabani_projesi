@@ -153,4 +153,15 @@ select * from tbl_arac where model in(1998,2005,2007);
  select * from tbl_satıs where satis_tarih between  '2010.03.01'   and  '2010.12.31' ;
  select * from tbl_alım where 6>DATEDIFF(MONTH,alim_tarih,GETDATE());
  select datename(WEEKDAY,satis_tarih)as "satılan günler" , datename(DAY,satis_tarih) from tbl_satıs;
+					 
+
+					 --Gruplandırarak sorgulama
+
+select count(adres),adres from tbl_musteri  group by adres having adres like '%tokat%';
+select avg(fiyat),datediff(year,model,getdate()) as "a" from tbl_arac where datediff(year,model,getdate())>3 group by fiyat;
+select avg(fiyat) from tbl_satıs group by fiyat;
+select fiyat from tbl_alım group by fiyat having AVG(fiyat)>10000;
+select max(fiyat)-MIN(fiyat) from tbl_arac group by fiyat ;
+
+
 		   
