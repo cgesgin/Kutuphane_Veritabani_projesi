@@ -164,4 +164,45 @@ select fiyat from tbl_alım group by fiyat having AVG(fiyat)>10000;
 select max(fiyat)-MIN(fiyat) from tbl_arac group by fiyat ;
 
 
+					--Birden fazla tablolar üzerinde sorgulama işlemleri(join işlemleri)
+
+select ad,soyad from tbl_musteri m inner join tbl_satıs s on m.musteri_no=s.musteri_no;
+
+select m.ad,m.soyad,ar.marka from tbl_musteri m 
+				inner join tbl_alım a on m.musteri_no=a.musteri_no
+				inner join tbl_arac ar on ar.arac_no=a.arac_no;
+
+insert into tbl_alım values(3,26,'2020.12.31',18000);
+
+select m.ad,count(a.musteri_no) as "alınan arac sayısı" from tbl_musteri m
+			inner join tbl_alım a on m.musteri_no=a.musteri_no
+			group by a.musteri_no,m.ad;
+
+select * from tbl_alım;
+
+select marka,model,s.satis_tarih from tbl_arac a inner join tbl_satıs s on a.arac_no=s.arac_no
+
+select SUM(a.fiyat) as " toplam alım", SUM(s.fiyat) as "toplam satılan fiyat",SUM(s.fiyat)-SUM(a.fiyat) as "satılan-alınan" from tbl_alım a,tbl_satıs s;
+
+select * from tbl_arac left outer join tbl_satıs on tbl_arac.arac_no=tbl_satıs.arac_no where tbl_satıs.musteri_no is null;
+insert into tbl_satıs values (3,26,'2020.12.31',32000);
+
+select ar.marka,AVG(a.fiyat) as "satilan aracın ortalama fiyatı" ,count(a.musteri_no) as "alan kişi sayısı" from tbl_arac ar
+			inner join tbl_satıs a on ar.arac_no=a.arac_no
+			group by a.arac_no,ar.arac_no,ar.marka;
+
+select distinct  ar.marka,COUNT(al.musteri_no) as "alım sayısı" , count(sa.satis_no)
+		from tbl_arac ar inner join tbl_alım al on ar.arac_no=al.arac_no 
+		inner join tbl_satıs sa on sa.arac_no=ar.arac_no
+	group by ar.marka;
+
+select ar.marka,mu.ad,sa.fiyat from tbl_satıs sa 
+	inner join tbl_musteri mu on sa.musteri_no=mu.musteri_no
+	inner join tbl_arac ar on ar.arac_no=sa.arac_no where sa.fiyat>20000;
+
+select mu.ad,mu.adres,ar.marka from tbl_musteri mu 
+		inner join tbl_satıs sa on sa.musteri_no=mu.musteri_no
+		inner join tbl_arac ar on ar.arac_no=sa.arac_no 
+	where mu.adres like '%tokat%'; 
+
 		   
