@@ -6,7 +6,7 @@
 
 ### Veri tabanı yapısı ve özellikleri
 ---
-* Veri tabanı birden fazla kütüphane, kütphanelerin içerdiği kitaplar ve üyeler temeline dayanmaktadır.
+ Veri tabanı birden fazla kütüphane, kütphanelerin içerdiği kitaplar ve üyeler temeline dayanmaktadır.
 
 
 | Tablolar     | İşlevi        |
