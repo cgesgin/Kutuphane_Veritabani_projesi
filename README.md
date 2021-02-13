@@ -23,13 +23,13 @@
 |KATEGORİLER	|
 
 
-### E-R Diyagram
+#### E-R Diyagram
 
 ---
 
 ![](https://github.com/cgesgin/SQL-Kutuphane_Veritabani_projesi/blob/main/E-R%20Diyagram/K%C3%BCt%C3%BCphane_veritaban%C4%B1_E_R_Diyagram.png)
 
 ---
-### Veri tabanında bulunan nesneler
+#### Veri tabanında bulunan nesneler
 
 *	10 adet Tablo
