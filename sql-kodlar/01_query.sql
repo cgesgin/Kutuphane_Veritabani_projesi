@@ -1,7 +1,7 @@
 -- Veri tabanı oluşturuldu. Tablolar ve yabancıl anahtar tanımlamaları yapıldı.
 
 --veri tabanı oluşturulmasu
-create database db_library;
+create database db_kutuphane;
 
 -- tablo oluşturulma işlermleri
 create table tbl_uyeler(
