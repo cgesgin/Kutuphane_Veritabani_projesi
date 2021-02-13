@@ -4,8 +4,8 @@
 * Kullanılan veri tabanı [Microsof SQL SERVER 2019](https://www.microsoft.com/tr-tr/sql-server/sql-server-downloads) ' dir
 * E-R Diyagram Çizimi için [Umlet](https://www.umlet.com/) kullanılmıştır.
 
-### Veri tabanı yapısı ve özellikleri
----
+# Veri tabanı yapısı ve özellikleri
+
  Veri tabanı birden fazla kütüphane, kütphanelerin içerdiği kitaplar ve üyeler temeline dayanmaktadır.
 
 
@@ -23,13 +23,13 @@
 |KATEGORİLER	|
 
 
-#### E-R Diyagram
+### E-R Diyagram
 
 ---
 
 ![](https://github.com/cgesgin/SQL-Kutuphane_Veritabani_projesi/blob/main/E-R%20Diyagram/K%C3%BCt%C3%BCphane_veritaban%C4%B1_E_R_Diyagram.png)
 
 ---
-#### Veri tabanında bulunan nesneler
+### Veri tabanında bulunan nesneler
 
 *	10 adet Tablo
