@@ -171,3 +171,27 @@ values(123456787,3,2,'12.10.2019','12.10.2020');
 
 insert into tbl_emanet (isbn,uye_no,kutuphane_no,emanet_tarihi,teslim_tarihi)
 values(123456788,11,1,'12.10.2010','12.17.2010'); 
+
+-------------------------------------------------------------------------------------------------------
+
+insert into tbl_kitap_kategori values(123456780,1);
+insert into tbl_kitap_kategori values(123456781,1);
+insert into tbl_kitap_kategori values(123456782,1);
+insert into tbl_kitap_kategori values(123456783,1);
+insert into tbl_kitap_kategori values(123456784,2);
+insert into tbl_kitap_kategori values(123456785,2);
+insert into tbl_kitap_kategori values(123456786,6);
+insert into tbl_kitap_kategori values(123456787,5);
+insert into tbl_kitap_kategori values(123456788,5);
+insert into tbl_kitap_kategori values(123456789,1);
+
+-------------------------------------------------------------------------------------------------------
+
+insert into tbl_kitap_yazar values(123456789,1);
+insert into tbl_kitap_yazar values(123456780,2);
+insert into tbl_kitap_yazar values(123456781,3);
+insert into tbl_kitap_yazar values(123456782,4);
+insert into tbl_kitap_yazar values(123456783,5);
+insert into tbl_kitap_yazar values(123456784,6);
+
+-------------------------------------------------------------------------------------------------------
