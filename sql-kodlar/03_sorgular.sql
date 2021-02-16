@@ -1,6 +1,6 @@
 --tablolarda karmaşık sorgulama işlemleri
 
---alt sorgularla işlemler
+--alt sorgularla işlemlerde exists kullanı
 select * from tbl_kitaplar where sayfa_sayisi> (
 		select min(sayfa_sayisi) from tbl_kitaplar group by kitap_adi
 		having kitap_adi like '%aa%' 
@@ -37,3 +37,16 @@ select * from tbl_yazarlar y where not exists(
 	having count(*)>=5
 );
 
+
+-- bilgisayar kategorisinde kitap yazan yazalar listesi
+select * from tbl_yazarlar y where exists (
+	select * from tbl_kitap_yazar ky
+	inner join tbl_kitap_kategori kk on kk.isbn= ky.isbn
+	inner join tbl_kategoriler ka on ka.kategori_no=kk.kategori_no
+	where ka.kategori_adi='Bilgisayar' and y.yazar_no=ky.yazar_no
+);
+
+--aynı adrese sahip üyelerin olup olmadıgının kontrolü
+select distinct 'Aynı adrese sahip üye vardır' where exists (
+	select * from tbl_uyeler group by adres_no having count(*)>1
+);
