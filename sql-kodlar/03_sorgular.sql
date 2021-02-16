@@ -1,6 +1,6 @@
 --tablolarda karmaşık sorgulama işlemleri
 
---alt sorgularda işlemler
+--alt sorgularla işlemler
 select * from tbl_kitaplar where sayfa_sayisi> (
 		select min(sayfa_sayisi) from tbl_kitaplar group by kitap_adi
 		having kitap_adi like '%aa%' 
