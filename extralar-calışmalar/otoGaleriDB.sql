@@ -205,4 +205,37 @@ select mu.ad,mu.adres,ar.marka from tbl_musteri mu
 		inner join tbl_arac ar on ar.arac_no=sa.arac_no 
 	where mu.adres like '%tokat%'; 
 
-		   
+							
+										     --Alt sorgular
+select ad,soyad from tbl_musteri m inner join tbl_satıs s on m.musteri_no=s.musteri_no and s.arac_no in ((select arac_no from tbl_satıs where musteri_no=
+	(select musteri_no from tbl_musteri where ad='Turgut' and soyad ='özseven' )
+));
+
+select *from tbl_arac where arac_no in(select arac_no from tbl_satıs);
+
+select * from tbl_arac where arac_no in (select arac_no from tbl_satıs s where s.fiyat > all (select fiyat from tbl_alım));
+											      
+select a.adSoyad "opel marka alım yapan" , s.adSoyad"opel marka satın alan" from (select ad+soyad as"adSoyad" from tbl_musteri where musteri_no in (select musteri_no from tbl_alım 
+	where arac_no in((select arac_no from tbl_arac where marka='opel')))) as a,(select ad+soyad as"adSoyad" from tbl_musteri where musteri_no in (select musteri_no from tbl_satıs 
+	where arac_no in((select arac_no from tbl_arac where marka='opel')))) s
+
+select s.arac_no , s.fiyat from  tbl_satıs s  where s.arac_no in (select arac_no from tbl_arac where fiyat>20000);
+																		      
+select SUM(fiyat) from tbl_satıs 
+where musteri_no in (
+	select musteri_no from tbl_musteri where adres like '%turhal%' or adres like '%amasya%'
+	) group by fiyat order by fiyat asc ;
+																		      
+select ad+soyad as adSoyad from tbl_musteri where musteri_no not in(select musteri_no from tbl_satıs) or
+ musteri_no not in(select musteri_no from tbl_alım);
+																		      
+select*from tbl_musteri where musteri_no in (select musteri_no from tbl_satıs where 5=DATEPART(MONTH,satis_tarih) or 6=DATEPART(MONTH,satis_tarih));																		      
+
+ select * from tbl_arac where arac_no in 
+ (
+	select arac_no from tbl_alım 
+ ) and arac_no not in
+ (
+	select arac_no from tbl_satıs
+ );
+															
