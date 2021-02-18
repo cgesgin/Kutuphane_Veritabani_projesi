@@ -31,7 +31,8 @@ create table tbl_satıs(
 	fiyat int
 );
 
-
+select * from (select * from tbl_satıs where fiyat=(select MAX(fiyat) from tbl_satıs)) as a,tbl_arac,tbl_musteri
+where tbl_arac.arac_no=a.arac_no and a.musteri_no=tbl_musteri.musteri_no;
 create table tbl_alım(
 	alim_no int identity(1,1) primary key,
 	musteri_no int, 
@@ -242,3 +243,9 @@ select*from tbl_musteri where musteri_no in (select musteri_no from tbl_satıs w
 
 select * from (select arac_no from tbl_arac where  YEAR(GETDATE())-model>3) as a,tbl_arac
 where a.arac_no=tbl_arac.arac_no;
+
+select * from   tbl_satıs s,tbl_arac
+where s.fiyat>(select  AVG(fiyat) from tbl_satıs) and s.arac_no=tbl_arac.arac_no;
+	       
+	       						--Viewler
+	 
