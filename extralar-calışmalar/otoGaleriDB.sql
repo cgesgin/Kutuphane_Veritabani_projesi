@@ -239,3 +239,6 @@ select*from tbl_musteri where musteri_no in (select musteri_no from tbl_satıs w
 	select arac_no from tbl_satıs
  );
 															
+
+select * from (select arac_no from tbl_arac where  YEAR(GETDATE())-model>3) as a,tbl_arac
+where a.arac_no=tbl_arac.arac_no;
