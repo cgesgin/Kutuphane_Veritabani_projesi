@@ -248,4 +248,30 @@ select * from   tbl_satıs s,tbl_arac
 where s.fiyat>(select  AVG(fiyat) from tbl_satıs) and s.arac_no=tbl_arac.arac_no;
 	       
 	       						--Viewler
-	 
+create view vw_satis_arac
+as
+select tbl_arac.marka,tbl_arac.model,tbl_arac.arac_no from tbl_satıs inner 
+join tbl_arac on tbl_satıs.arac_no=tbl_arac.arac_no;
+	       
+create view wv_alınan_arac_sayısı
+as
+select COUNT(*) as "arac sayısı" from tbl_alım;
+	       
+create view vw_satis_aralik
+as
+select * from tbl_satıs where fiyat between 8000 and 18000;
+	       
+create view vw_alim_satim 
+as
+select m.ad,m.soyad,s.satis_tarih,a.alim_tarih,'fiat' as arac_adı from tbl_musteri m
+inner join tbl_alım a on a.musteri_no=m.musteri_no
+inner join tbl_satıs s on s.musteri_no=s.musteri_no
+where s.arac_no=(select arac_no from tbl_arac where marka like '%Fiat%') and 
+a.arac_no=(select arac_no from tbl_arac where marka like '%Fiat%') ;
+
+create view vw_arac_fiyat
+as 
+select a.marka,a.fiyat as "arac fiyatı", s.fiyat as"satıs fiyatı" from tbl_arac a 
+inner join tbl_satıs s on s.arac_no=a.arac_no
+where a.fiyat>=20000;
+		       
