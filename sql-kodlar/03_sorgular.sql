@@ -93,3 +93,21 @@ where adres.adres_no=tbl_uyeler.adres_no;
 --ortalama sayfa sayısından daha fazla sayfaya sahip olan kitapları listeleyn sql sorgusu
 select * from tbl_kitaplar , (select AVG(sayfa_sayisi) as "sayfa_ort"  from tbl_kitaplar) ort
 where tbl_kitaplar.sayfa_sayisi>ort.sayfa_ort;
+
+-- gruplandırarak sorgulama
+select kategori_no,COUNT(isbn) as "kitap sayisi" from tbl_kitap_kategori group by kategori_no;
+select uye_no ,COUNT(kutuphane_no)as"kullanım adedi" from tbl_emanet group by uye_no order by [kullanım adedi]; 
+select COUNT(isbn) as adet,yazar_no from tbl_kitap_yazar group by yazar_no;
+select kutuphane_no, AVG(DATEDIFF(DAY,emanet_tarihi,teslim_tarihi))as"emanet süresi" from tbl_emanet group by kutuphane_no;
+select kutuphane_no,COUNT(isbn) as "kitap sayisi" from tbl_kitap_kutuphane where adet=1 group by kutuphane_no;
+select kutuphane_no,SUM(adet)as "toplam kitap sayisi" from tbl_kitap_kutuphane group by kutuphane_no;
+select kutuphane_no,COUNT(isbn) as "kitap sayisi" from tbl_kitap_kutuphane group by kutuphane_no;
+				  
+select adres_no,COUNT(*) as "adres sayısı" from tbl_uyeler group by adres_no having COUNT(*)>1;
+select isbn,COUNT(*) from tbl_kitap_kategori group by isbn having COUNT(*)>=1;
+select COUNT(yazar_no),isbn from tbl_kitap_yazar group by isbn having COUNT(yazar_no)=1;
+select isbn, COUNT(uye_no) as "emanet sayısı" from tbl_emanet group by isbn having COUNT(uye_no)>3;
+select kategori_no,COUNT(*) as "kitap sayısı" from tbl_kitap_kategori group by kategori_no having COUNT(*)>3;
+select kategori_no ,COUNT(isbn)"kitap sayısı" from tbl_kitap_kategori group by kategori_no; 
+select isbn,uye_no,COUNT(uye_no)as"uye adedi" from tbl_emanet group by isbn,uye_no;
+select kutuphane_no,isbn from tbl_emanet group by kutuphane_no,isbn order by kutuphane_no,isbn;
