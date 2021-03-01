@@ -111,3 +111,68 @@ select kategori_no,COUNT(*) as "kitap sayısı" from tbl_kitap_kategori group by
 select kategori_no ,COUNT(isbn)"kitap sayısı" from tbl_kitap_kategori group by kategori_no; 
 select isbn,uye_no,COUNT(uye_no)as"uye adedi" from tbl_emanet group by isbn,uye_no;
 select kutuphane_no,isbn from tbl_emanet group by kutuphane_no,isbn order by kutuphane_no,isbn;
+
+				  --birden fazla tablo üzreinde sorgulamalar
+select isbn,yazar_adi,yazar_soyadi from	tbl_kitap_yazar ky, tbl_yazarlar y where ky.yazar_no=y.yazar_no;
+
+select isbn,kategori_adi from tbl_kitap_kategori kk ,tbl_kategoriler k where kk.kategori_no=k.kategori_no;
+
+elect isbn,yazar_adi,yazar_soyadi from tbl_yazarlar y inner join tbl_kitap_yazar ky on y.yazar_no=ky.yazar_no
+order by yazar_adi,yazar_soyadi;
+
+select kitap_adi,kk.isbn,kk.kutuphane_no from tbl_kitaplar 
+inner join tbl_kitap_kutuphane kk on tbl_kitaplar.isbn=kk.isbn;
+
+select kategori_adi,SUM(adet) as "kitap sayisi"  from tbl_kitap_kutuphane kk 
+inner join tbl_kitap_kategori kkt on kk.isbn=kkt.isbn
+inner join tbl_kategoriler kkg on kkg.kategori_no=kkt.kategori_no
+group by kategori_adi;
+
+select y.yazar_adi,y.yazar_soyadi,SUM (sayfa_sayisi) as "sayfa sayisi" from tbl_yazarlar y 
+inner join tbl_kitap_yazar ky on ky.yazar_no=y.yazar_no
+inner join tbl_kitaplar k on k.isbn=ky.isbn
+group by y.yazar_adi,y.yazar_soyadi
+order by [sayfa sayisi] desc;
+
+select y.yazar_adi,y.yazar_soyadi, COUNT(kk.adet) as "kitap sayisi" from  tbl_kitap_kutuphane kk
+inner join tbl_kitap_yazar ky on ky.isbn=kk.isbn 
+inner join tbl_yazarlar y on y.yazar_no=ky.yazar_no
+group by y.yazar_adi,y.yazar_soyadi;
+
+select k.kutuphane_ismi,y.yazar_adi,y.yazar_soyadi from tbl_kutuphane k 
+inner join tbl_kitap_kutuphane kk on kk.kutuphane_no=k.kutuphane_no
+inner join tbl_kitap_yazar ky on ky.isbn=kk.isbn
+inner join tbl_yazarlar y on y.yazar_no=ky.yazar_no
+where k.kutuphane_ismi='turhal' or k.kutuphane_ismi='zile'
+group by k.kutuphane_ismi,y.yazar_adi,y.yazar_soyadi
+order by k.kutuphane_ismi,yazar_adi;
+
+select u.uye_adi,u.uye_soyadi,u.telefon from tbl_uyeler u 
+inner join  tbl_emanet e on e.uye_no=u.uye_no
+where e.teslim_tarihi is null;
+
+select u.uye_adi,u.uye_soyadi,u.telefon,a.* from tbl_uyeler u 
+inner join  tbl_emanet e on e.uye_no=u.uye_no
+inner join tbl_adresler a on u.adres_no=a.adres_no
+where e.teslim_tarihi is null;
+
+select tbl_yazarlar.*, COUNT(tbl_kitap_yazar.isbn) as"kitap sayisi" from tbl_yazarlar
+left join tbl_kitap_yazar on tbl_yazarlar.yazar_no=tbl_kitap_yazar.yazar_no
+group by tbl_yazarlar.yazar_no,yazar_adi,yazar_soyadi;
+
+select tbl_yazarlar.*, COUNT(tbl_kitap_yazar.isbn) as"kitap sayisi" from tbl_yazarlar
+inner join tbl_kitap_yazar on tbl_yazarlar.yazar_no=tbl_kitap_yazar.yazar_no
+group by tbl_yazarlar.yazar_no,yazar_adi,yazar_soyadi;
+
+select tbl_kategoriler.*,SUM(tbl_kitap_kutuphane.adet) as "kitap sayisi" from tbl_kitap_kutuphane
+inner join tbl_kitap_kategori on tbl_kitap_kutuphane.isbn=tbl_kitap_kategori.isbn
+right join tbl_kategoriler on tbl_kategoriler.kategori_no=tbl_kitap_kategori.kategori_no
+group by tbl_kategoriler.kategori_no,tbl_kategoriler.kategori_adi;
+
+select isbn from tbl_kitap_kutuphane
+intersect 
+select isbn from tbl_kitaplar
+
+select kategori_no from tbl_kategoriler
+intersect 
+select kategori_no from tbl_kitap_kategori
