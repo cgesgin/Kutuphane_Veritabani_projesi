@@ -176,3 +176,30 @@ select isbn from tbl_kitaplar
 select kategori_no from tbl_kategoriler
 intersect 
 select kategori_no from tbl_kitap_kategori
+				  
+				  --Altsorgular 
+
+select isbn from tbl_kitap_kategori 
+where kategori_no=(select kategori_no from tbl_kategoriler where kategori_adi='bilgisayar');
+
+select * from tbl_kitaplar where sayfa_sayisi>(select AVG(sayfa_sayisi) from tbl_kitaplar);
+
+select * from tbl_emanet where kutuphane_no=(select kutuphane_no from tbl_kutuphane where kutuphane_ismi='turhal')
+
+select * from tbl_yazarlar where yazar_no not in(select yazar_no from tbl_kitap_yazar)
+
+select * from tbl_kitap_kategori where 
+kategori_no not in(select kategori_no from tbl_kategoriler where kategori_adi='diğer' )
+
+select * from tbl_kitap_yazar where yazar_no in 
+(select yazar_no from tbl_yazarlar where (yazar_adi='turgut' and yazar_soyadi='özseven') or (yazar_adi='ebubekir' and yazar_soyadi='yaşar'))
+
+select * from tbl_uyeler where uye_no in (select uye_no from tbl_emanet where teslim_tarihi is null)
+
+select * from tbl_kitaplar where isbn in
+(select isbn from tbl_kutuphane where kutuphane_ismi='Turhal' or kutuphane_ismi='Zile')
+
+select * from tbl_kitaplar where sayfa_sayisi >(select SUM(sayfa_sayisi) from tbl_yazarlar y
+inner join tbl_kitap_yazar ky on ky.yazar_no=y.yazar_no
+inner join tbl_kitaplar k on k.isbn=ky.isbn
+where yazar_adi='çebi' and yazar_soyadi='Bal')
