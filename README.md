@@ -11,16 +11,16 @@
 
 | Tablolar     | İşlevi        |
 | -------------| ------------- |
-|ÜYELER	|
-|EMANET|
-|YAZARLAR	|
-|KÜTÜPHANE|
-|KİTAP_KÜTÜPHANE	|
-|KİTAP_YAZAR	|
-|KİTAP_KATEGORİ	|
-|ADRESLER	|
-|KİTAPLAR| 
-|KATEGORİLER	|
+|ÜYELER	|Kütüphaneye kayıt olan kişilerin bilgilerini tutar.
+|EMANET|Üyelerin emanet aldığı ve nereden aldığı gibi verileri tutar.
+|YAZARLAR	|Yazarlarla ilgili verileri tutar.
+|KÜTÜPHANE|Kütüphane adı da dahil olmak üzere ilgili verileri tutar.
+|KİTAP_KÜTÜPHANE	|kitap ve kütüphane arasındaki ilişkileri tutar.
+|KİTAP_YAZAR	|Kitapların hangi yazarın yazdığı bilgileri tutar.
+|KİTAP_KATEGORİ	|Kitapların hangi kategoriye girdikleri verileri tutar.
+|ADRESLER	|Adres bilgilerini tutar.
+|KİTAPLAR|Kitaplar ile ilgili verileri tutar.
+|KATEGORİLER	|Kategori türlerini tutar.
 
 
 ### E-R Diyagram
@@ -33,3 +33,6 @@
 ### Veri tabanında bulunan nesneler
 
 *	10 adet Tablo
+*	1 adet view
+*	1 adet stored procedure
+*	1 adet index
