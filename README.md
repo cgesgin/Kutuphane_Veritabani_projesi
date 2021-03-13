@@ -35,6 +35,5 @@
 *	10 adet Tablo
 *	1 adet view
 *	1 adet stored procedure
-*	1 adet index
 *	1 adet trigger
 *	1 adet fonksiyon
